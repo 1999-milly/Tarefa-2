@@ -15,7 +15,7 @@ class Personagem{
     void atacar(double intensidade){
         if(energia>0){
             energia-=intensidade;
-            System.out.println(nome+" atacou em batalha com "+arma.tipo+" e dano causado foi de "+energia);
+            System.out.println(nome+" atacou em batalha com "+arma.tipo+" e dano causado foi de "+arma.dano);
         }
     }
     int niveldeEnergia(){
