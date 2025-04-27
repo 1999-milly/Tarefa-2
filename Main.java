@@ -1,47 +1,54 @@
-class Potencia{
-    int inicial;
-    int qtd;
-    Grafico saida;
-    Potencia(int inicial,int qtd){
-        this.inicial=inicial;
-        this.qtd=qtd;
-    }
-    public void conecta(Grafico saida){
-        this.saida=saida;
-    }
-    public void apresenta(){
-        if(saida!=null){
-            int valor=inicial;
-            for(int i=0;i<qtd;i++){
-                saida.plota(valor);
-                valor*=2;
-            }
-        }}}
-class Grafico{
-    boolean preenchido;
-    char caractere;
-    Grafico(boolean preenchido,char caractere){
-        this.preenchido=preenchido;
-        this.caractere=caractere;
-    }
-    public void plota(int valor){
-        if(preenchido){
-            System.out.println(caractere);
+class Motor{
+    double potencia;
+    String tipo;
+}
+class Carro{
+    String modelo;
+    String cor;
+    boolean ligado;
+    Motor motor;
+    double velocidade;
+    void liga(){
+        if(!ligado){
+            ligado=true;
+            System.out.println("Carro ligado.");
         }else{
-            System.out.println("  "+caractere);
+            System.out.println("Carro já está ligado.");
         }
+    }
+    void acelera(double qtd){
+        if(ligado){
+            velocidade+=qtd;
+            System.out.println("Acelerando! Velocidade atual: "+velocidade);
+        }
+    }
+    int pegaMarcha(){
+        if(velocidade==0)
+            return 0;
+        if(velocidade>0 && velocidade<=20)
+            return 1;
+        if(velocidade>20 && velocidade<=40)
+            return 2;
+        if(velocidade>40 && velocidade<=60)
+            return 3;
+        if(velocidade>60 && velocidade<=80)
+            return 4;
+        if(velocidade>80)
+            return 5;
+        return 0;
     }}
 public class Main{
     public static void main(String[] args){
-        Grafico g1=new Grafico(true,'#');
-        Grafico g2=new Grafico(false,  '*');
-        Potencia p=new Potencia(1,5);
-
-        p.conecta(g1);
-        p.apresenta();
-
-        p.conecta(g2);
-        p.apresenta();
-    }
-}
+    Carro c=new Carro();
+    c.cor="Azul";
+    c.modelo="Onix";
+    c.motor=new Motor();
+    c.motor.potencia=0.5;
+    c.velocidade=60;
+    c.liga();
+    c.acelera(30);
+    System.out.println("Modelo: "+c.modelo);
+    System.out.println("Potencia do motor: "+c.motor.potencia);
+    System.out.println("Marcha atual: "+c.pegaMarcha());
+    }}
 
